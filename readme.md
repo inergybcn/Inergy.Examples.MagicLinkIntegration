@@ -18,6 +18,14 @@ En appsettings necesitas configurar el usuario master con su password y al usuar
 
 Tiene que haber sido creado previamente en SIE y estar dados de alta en el mismo MagicLinkGroup
 
+
+## Parámetros extra
+Si necesitas añadir parámetros extra, como el idioma o algún código para SIE, puedes añadirlo a continuación
+
+``` c#
+url = url + "&lang=es&code=12345";
+```
+
 # Llamadas HTTP para otros frameworks
 Si no quieres utilizar .Net como entorno, puedes encontrar aqui las llamadas http que se utilizan, para integrarlas en tu framework
 
@@ -75,11 +83,4 @@ wget --no-check-certificate --quiet \
   "expiration": "2025-06-26T19:39:45Z",
   "url": "https://sie-dev.inergy.online/test/login/magic-link?token=ey..."
 }
-```
-
-# Extra
-Si necesitas añadir parámetros extra, como el idioma o algún código para SIE, puedes añadirlo a continuación
-
-``` c#
-url = url + "&lang=es&code=12345";
 ```
