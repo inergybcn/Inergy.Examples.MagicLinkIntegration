@@ -25,6 +25,10 @@ app.MapGet("/", async () =>
         {
             return Results.BadRequest("The generated URL is not valid.");
         }
+
+        // añadir parametros adicionales a la URL si es necesario
+        // url += "&lang=es&code=12345";     
+
         return Results.Redirect(url);
     }
     catch (Exception ex)

@@ -17,3 +17,69 @@ La idea es que los usuarios no hagan login con usuario y contraseña, sino que e
 En appsettings necesitas configurar el usuario master con su password y al usuario passwordless que quieras probar. 
 
 Tiene que haber sido creado previamente en SIE y estar dados de alta en el mismo MagicLinkGroup
+
+# Llamadas HTTP para otros frameworks
+Si no quieres utilizar .Net como entorno, puedes encontrar aqui las llamadas http que se utilizan, para integrarlas en tu framework
+
+### Master user login
+#### cUrl
+
+``` powershell
+curl --location 'https://sie-auth.inergy.online/account/login' \
+--header 'Content-Type: application/json' \
+--data-raw '{"email":"","password":""}'
+
+```
+
+#### wget
+``` powershell
+wget --no-check-certificate --quiet \
+  --method POST \
+  --timeout=0 \
+  --header 'Content-Type: application/json' \
+  --body-data '{"email":"","password":""}' \
+   'https://sie-auth.inergy.online/account/login'
+```
+
+#### Response
+``` json
+{
+    "token": "ey...",
+    "expiration": "2025-06-19T22:27:10Z"
+}
+```
+
+### Request magic link
+
+#### cUrl
+
+``` powershell
+curl --location --request POST 'https://sie-auth.inergy.online/sie/login_magic_link/{email}' \
+--header 'Authorization: ey...'
+
+```
+
+#### wget
+``` powershell
+wget --no-check-certificate --quiet \
+  --method POST \
+  --timeout=0 \
+  --header 'Authorization: Bearer ey...' \
+   'https://sie-auth.inergy.online/sie/login_magic_link/{email}'
+```
+
+#### Response
+``` json
+{
+  "token": "ey...",
+  "expiration": "2025-06-26T19:39:45Z",
+  "url": "https://sie-dev.inergy.online/test/login/magic-link?token=ey..."
+}
+```
+
+# Extra
+Si necesitas añadir parámetros extra, como el idioma o algún código para SIE, puedes añadirlo a continuación
+
+``` c#
+url = url + "&lang=es&code=12345";
+```
