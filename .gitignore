@@ -1,0 +1,60 @@
+# Compilación de binarios
+bin/
+obj/
+
+# Archivos generados por Visual Studio Code
+.vscode/
+*.code-workspace
+
+# Archivos de configuración de usuario (globales)
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Archivos de dependencias NuGet y lock
+*.nupkg
+*.snupkg
+project.lock.json
+project.fragment.lock.json
+artifacts/
+packages/
+*.dsv
+
+# Archivos de log y temporales
+*.log
+*.tmp
+*.bak
+
+# Archivos de configuración del sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Archivos de publicación (publicados localmente con dotnet publish)
+publish/
+
+# Configuración de Rider/JetBrains (si usas también este IDE)
+.idea/
+
+# Archivos generados por dotnet watch
+**/staticwebassets.dev.json
+**/staticwebassets.build.json
+**/staticwebassets.runtime.json
+
+# Archivos de certificados generados para desarrollo
+*.pfx
+*.p12
+
+# Configuraciones de lanzamientos locales (debug)
+launchSettings.json
+
+# Archivos de test con cobertura
+TestResults/
+*.coverage
+*.coveragexml
+coverage*
+
+# Archivos generados por herramientas de documentación
+*.docfx
+*.apidoc
