@@ -1,15 +1,18 @@
 # Inergy.Examples.MagicLinkIntegration
 
 Este repositorio es un ejemplo de cómo integrar un aplicación con **SIE** utilizando un **Magic Link** que ofrece el servicio de **Autenticación** de **Inergy**.
-Se trata de un proyecto **ASP .NET Core**. Para poder ejecutar el proyecto se necesita:
+Se trata de un proyecto **ASP .NET Core**.
+
+Para poder ejecutar el proyecto se necesita:
 - Un usuario **Administrador** *username + password* que es único por aplicación a integrar y es que tiene los permisos para crear **Magic Link**. Proporcionado por **Inergy**.
 - Usuarios *passwordless*, en adelante 'usuarios', previamente registrados en **SIE** con un *username* equivalente a su correo electrónico. 
     - Estos usuarios deben crearse previamente en SIE y estar dados de alta en un mismo MagicLinkGroup. Responsabilidad de **Inergy**.
+
 Los usuarios no acceden a **SIE** utilizando *username + password*, sino que el usuario **Administrador** solicita los accesos a los diferentes usuarios generando una **URL** de acceso *passwordless*.
 
 ## Cómo ejecutar este código en Visual Studio Code
 - Clonar el repositorio y abrirlo con *Visual Studio Code*.
-- Necesitarás las siguientes dependencias:
+- Añadir las siguientes dependencias:
     - [.Net 9 SDK](https://dotnet.microsoft.com/es-es/download/dotnet/9.0)
     - *C# Dev Kit extension*, instalable desde la pestaña de extensiones de *Visual Studio Code*.
 - Simplemente con **F5** se compilará y empezará el *debug*.
@@ -26,18 +29,18 @@ Los usuarios no acceden a **SIE** utilizando *username + password*, sino que el 
 
 ## Parámetros extra
 Se pueden añadir parámetros extra de carácter opcional:
-- **Idioma**: parámetro *lang*. Si no se añade se toma el valor por defecto para **catalán**.** Valores disponibles:
+- **Idioma**: Parámetro *lang*. Si no se añade se toma el valor por defecto para **catalán**. Valores disponibles:
 
 | Lang | Language |
 | -- | -- |
-| ca | catalá (default) |
+| ca | Catalá (default) |
 | cs | Czech |
 | el | Greek |
 | en | English |
-| es | castellano |
+| es | Castellano |
 | eu | Euskera |
 
-- **Coce**: Enterop opcional que equivale al nº de factura de un suministro, que habilita el acceso directo a la **Ficha de Suministro**.
+- **Code**: Parámetro *Code*. Entero opcional que equivale al nº de factura de un suministro, que habilita el acceso directo a la **Ficha de Suministro**.
 - Estos parametros, que son opcionales, se pueden añadir al **Magic Link** de la siguiente manera:
 
 ``` c#
