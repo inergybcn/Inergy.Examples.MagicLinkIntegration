@@ -1,33 +1,51 @@
 # Inergy.Examples.MagicLinkIntegration
 
-Este repositorio es un ejemplo de cómo integrarte con SIE utilizando la tecnología MagicLink. Para ello necesitamos:
-- Un usuario master
-- n Usuarios passwordless, en adelante 'usuarios'
+Este repositorio es un ejemplo de cómo integrar un aplicación con **SIE** utilizando un **Magic Link** que ofrece el servicio de **Autenticación** de **Inergy**.
+Se trata de un proyecto **ASP .NET Core**. Para poder ejecutar el proyecto se necesita:
+- Un usuario **Administrador** *username + password* que es único por aplicación a integrar y es que tiene los permisos para crear **Magic Link**. Proporcionado por **Inergy**.
+- Usuarios *passwordless*, en adelante 'usuarios', previamente registrados en **SIE** con un *username* equivalente a su correo electrónico. 
+    - Estos usuarios deben crearse previamente en SIE y estar dados de alta en un mismo MagicLinkGroup. Responsabilidad de **Inergy**.
+Los usuarios no acceden a **SIE** utilizando *username + password*, sino que el usuario **Administrador** solicita los accesos a los diferentes usuarios generando una **URL** de acceso *passwordless*.
 
-La idea es que los usuarios no hagan login con usuario y contraseña, sino que el master solicite los accesos a los diferentes usuarios.
-
-## Cómo ejecutar este código en VS Code
-- Clona el repositorio y abrelo con Visual Studio Code
+## Cómo ejecutar este código en Visual Studio Code
+- Clonar el repositorio y abrirlo con *Visual Studio Code*.
 - Necesitarás las siguientes dependencias:
-    - .Net 9 SDK (desde la web https://dotnet.microsoft.com/es-es/download/dotnet/9.0)
-    - C# Dev Kit extension (desde la pestaña de extensiones de VSCode)
-- Simplemente con F5 se compilará y empezará el debug.
+    - [.Net 9 SDK](https://dotnet.microsoft.com/es-es/download/dotnet/9.0)
+    - *C# Dev Kit extension*, instalable desde la pestaña de extensiones de *Visual Studio Code*.
+- Simplemente con **F5** se compilará y empezará el *debug*.
+
+## Cómo ejecutar este código en Visual Studio 2022
+- Tener actualizado *Visual Studio 2022*.
+- Clonar el repositorio desde la interfaz de *Visual Studio 2022*.
+- Simplemente con **F5** se compilará y empezará el *debug*.
 
 ## Configuración
-En appsettings necesitas configurar el usuario master con su password y al usuario passwordless que quieras probar. 
-
-Tiene que haber sido creado previamente en SIE y estar dados de alta en el mismo MagicLinkGroup
-
+- En **appsettings.json** añadir el valor de la clave *MasterUser.Email* del usuario **Administrador**.
+- Para pruebas se puede añadir la clave *MasterUser.Password* del usuario **Administrador**, pero se recomienda el uso de un servicio de gestión de secretos.
+- La clave *PasswordlessUser.Email* es el *username* del usaurio que accede a **SIE** con el **Magic Link**. Esta configuración sólo sirve para pruebas y en producción debe obtenerse la información del usuario de la aplicación que se integra en **SIE**.
 
 ## Parámetros extra
-Si necesitas añadir parámetros extra, como el idioma o algún código para SIE, puedes añadirlo a continuación
+Se pueden añadir parámetros extra de carácter opcional:
+- **Idioma**: parámetro *lang*. Si no se añade se toma el valor por defecto para **catalán**.** Valores disponibles:
+
+| Lang | Language |
+| -- | -- |
+| ca | catalá (default) |
+| cs | Czech |
+| el | Greek |
+| en | English |
+| es | castellano |
+| eu | Euskera |
+
+- **Coce**: Enterop opcional que equivale al nº de factura de un suministro, que habilita el acceso directo a la **Ficha de Suministro**.
+- Estos parametros, que son opcionales, se pueden añadir al **Magic Link** de la siguiente manera:
 
 ``` c#
 url = url + "&lang=es&code=12345";
 ```
 
 # Llamadas HTTP para otros frameworks
-Si no quieres utilizar .Net como entorno, puedes encontrar aqui las llamadas http que se utilizan, para integrarlas en tu framework
+Si no quiere utilizar **.NET**, se pueden encontrar aqui las llamadas **HTTP** que se utilizan, para integrarlas en el *stack* de la aplicación a integrar en **SIE**.
 
 ### Master user login
 #### cUrl
@@ -36,7 +54,6 @@ Si no quieres utilizar .Net como entorno, puedes encontrar aqui las llamadas htt
 curl --location 'https://sie-auth.inergy.online/account/login' \
 --header 'Content-Type: application/json' \
 --data-raw '{"email":"","password":""}'
-
 ```
 
 #### wget
@@ -58,13 +75,11 @@ wget --no-check-certificate --quiet \
 ```
 
 ### Request magic link
-
 #### cUrl
 
 ``` powershell
 curl --location --request POST 'https://sie-auth.inergy.online/sie/login_magic_link/{email}' \
 --header 'Authorization: ey...'
-
 ```
 
 #### wget
