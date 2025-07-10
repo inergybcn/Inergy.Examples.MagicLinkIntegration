@@ -33,12 +33,12 @@ Se pueden añadir parámetros extra de carácter opcional:
 
 | Lang | Language |
 | -- | -- |
-| ca | Catalá (default) |
-| cs | Czech |
-| el | Greek |
-| en | English |
-| es | Castellano |
-| eu | Euskera |
+| ca-ES | Catalá (default) |
+| cs-CZ | Czech |
+| el-GR | Greek |
+| en-GB | English |
+| es-ES | Castellano |
+| eu-ES | Euskera |
 
 - **Code**: Parámetro *Code*. Entero opcional que equivale al nº de factura de un suministro, que habilita el acceso directo a la **Ficha de Suministro**.
 - Estos parametros, que son opcionales, se pueden añadir al **Magic Link** de la siguiente manera:

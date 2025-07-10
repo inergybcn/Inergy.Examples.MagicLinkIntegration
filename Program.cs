@@ -38,8 +38,19 @@ app.MapGet("/", async () =>
             return Results.BadRequest("The generated URL is not valid.");
         }
 
-        // Añadir parametros adicionales a la URL sólo si es necesario
-        // url += "&lang=es&code=12345";     
+        // Añadir parámetros adicionales a la URL sólo si es necesario: código
+        var code = builder.Configuration["PasswordlessUser:Code"];
+        if (!string.IsNullOrEmpty(code))
+        {
+            url += $"&code={Uri.EscapeDataString(code)}";
+        }
+
+        // Añadir parámetros adicionales a la URL sólo si es necesario: idioma
+        var lang = builder.Configuration["PasswordlessUser:Lang"];
+        if (!string.IsNullOrEmpty(lang))
+        {
+            url += $"&lang={lang}";
+        }  
 
         return Results.Redirect(url);
     }
