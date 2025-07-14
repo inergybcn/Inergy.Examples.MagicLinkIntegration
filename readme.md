@@ -23,10 +23,31 @@ Los usuarios no acceden a **SIE** utilizando *username + password*, sino que el 
 - Simplemente con **F5** se compilará y empezará el *debug*.
 
 ## Configuración
-- En **appsettings.json** añadir el valor de la clave *MasterUser.Email* del usuario **Administrador**.
-- Para pruebas se puede añadir la clave *MasterUser.Password* del usuario **Administrador**, pero se recomienda el uso de un servicio de gestión de secretos.
-- La clave *PasswordlessUser.Email* es el *username* del usaurio que accede a **SIE** con el **Magic Link**. Esta configuración sólo sirve para pruebas y en producción debe obtenerse la información del usuario de la aplicación que se integra en **SIE**.
 
+- En el archivo **appsettings.json** se especifican las variables de configuración necesarias para ejecutar el ejemplo:
+
+``` c#
+{
+  "MasterUser": {
+    "Email": "",
+    "Password": ""
+  },
+  "PasswordlessUser": {
+    "Email": "",
+    "Code": "",
+    "Lang": ""
+  }
+}
+```
+
+- **MasterUser**: es el usuario *master administrador* de la aplicación que se integra. Proporcionado por **Inergy**.
+  - **EMail**: correo electrónico. **Obligatorio.**
+  - **Password**: contraseña. **Obligatorio.** Para pruebas se puede añadir esta contraseña directamente, pero se recomienda el uso de un servicio de gestión de secretos.
+- **PasswordlessUser**: es el usuario con el que se accede a **SIE** con el **Magic Link**.
+  - **Email**: correo electrónico. **Obligatorio.**
+  - **Code**: código alfanumerico vinculado a funcionalidad. **Opcional.**
+  - **Lang**: idioma. **Opcional.** Por defecto es el catalán.
+  
 ## Parámetros extra
 Se pueden añadir parámetros extra de carácter opcional:
 - **Idioma**: Parámetro *lang*. Si no se añade se toma el valor por defecto para **catalán**. Valores disponibles:
